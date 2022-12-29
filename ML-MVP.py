@@ -47,10 +47,6 @@ select_cols = data.columns[~data.columns.isin(removed_cols)]
 scaler = MinMaxScaler()
 data[select_cols] = scaler.fit_transform(data[select_cols])
 
-# Sequential Feature Selector 
-sfs.fit(data[select_cols], data["target"])
-predictors = list(select_cols[sfs.get_support()])
-
 # Using past data to predict next seasons
 def backtest(df, model, predictors, start = 2, step =1):
     # start param means we use first two seasons to backtest
